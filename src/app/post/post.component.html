@@ -1,7 +1,5 @@
-<p>
-  ID: {{post.id}}<br>
-  AUTHOR: {{post.author}}<br>
-  CREATED: {{post.created}}<br>
-  TITLE: {{post.title}}<br>
-  CONTENT: {{post.content}}<br>
-</p>
+<h2>{{post.title}}</h2>
+<h3>{{post.author}}</h3>
+{{post.created | date}}
+<hr>
+{{post.content}}
