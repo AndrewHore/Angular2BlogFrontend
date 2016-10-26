@@ -11,6 +11,12 @@ export class PostService {
   constructor(private http: Http) { }
 
   private backendUrl = "http://backend.andrew-hore.com/api/";
+  
+  getAllPosts(): Promise<Post[]> {
+    return this.http.get(this.backendUrl + "post")
+      .toPromise()
+      .then(response => response.json() as Post[]);
+  }
 
   getPost(id: number): Promise<Post> {
     return this.http.get(this.backendUrl + "post/" + id)
