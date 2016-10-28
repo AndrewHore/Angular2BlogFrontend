@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ActivatedRoute, Params }   from '@angular/router';
+import { Location }                 from '@angular/common';
+
 import { PostService } from '../services/post-service/post.service';
 
 @Component({
@@ -9,13 +12,23 @@ import { PostService } from '../services/post-service/post.service';
 })
 export class PostComponent implements OnInit {
 
-  constructor(private postService: PostService) { }
+  constructor(
+    private postService: PostService, 
+    private route: ActivatedRoute,
+    private location: Location 
+  ) {}
 
   post = new Object();
 
   ngOnInit() {
-    this.postService.getPost(1)
-    .then(post => this.post = post);
+    this.route.params.forEach((params: Params) => {
+      let id = +params['id'];
+      this.postService.getPost(id)
+      .then(post => this.post = post);
+    });
   }
 
+  goBack(): void {
+    this.location.back();
+  }
 }
